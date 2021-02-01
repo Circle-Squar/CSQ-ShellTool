@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/swivi/src/CSQ-ShellTool/Build",
+  "command": "/usr/bin/c++  -I/swivi/src/CSQ-ShellTool/includes -std=c++11 -o CMakeFiles/CSQ-ShellTools.dir/src/main.cpp.o -c /swivi/src/CSQ-ShellTool/src/main.cpp",
+  "file": "/swivi/src/CSQ-ShellTool/src/main.cpp"
+}
+]
