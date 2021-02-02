@@ -209,9 +209,6 @@ int main(int argc, char *argv[]) {
       cmakeFile
           << "INSTALL_JAR(${PROJECT_NAME} ${LIB_INSTALL_DIR}/${PROJECT_NAME})"
           << std::endl;
-      cmakeFile
-          << "INSTALL_JAR_SYMLINK(${PROJECT_NAME} ${JAVA_LIB_INSTALL_DIR})"
-          << std::endl;
     }
     break;
   }
