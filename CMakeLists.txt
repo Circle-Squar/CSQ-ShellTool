@@ -17,7 +17,7 @@ SET(
   SrcsFile 
 
   "cmgen"
-  "fftran"
+  #  "fftran"
   )
 
 foreach(SRCS ${SrcsFile})

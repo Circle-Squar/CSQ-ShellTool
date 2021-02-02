@@ -1,2 +1,4 @@
 test.sh
 .ccls-cache
+Build/*
+Output
