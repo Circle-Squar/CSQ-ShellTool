@@ -31,15 +31,16 @@ int main(int argc, char *argv[]) {
       case 'h':
         std::cout
             << "cmgen [-l c/j (c/c++/java) ] [-n] ProjectName [-v "
-               "Project version] [-f]"
+               "Project version] [-f] [-i]"
             << std::endl
             << "cmgen : " << std::endl
             << "\t-h This sheet!"
             << "\t-l Programing Language : c / j" << std ::endl
             << "\t-n Project Name" << std ::endl
             << "\t-v Project Version" << std ::endl
+            << "\t-i Generate basic install setting" << std ::endl
             << "\t-f Force Mode (Gen Project when \"CMakeLists.txt\" existed)"
-            << std ::endl;
+            << std::endl;
         exit(0);
         break;
 
