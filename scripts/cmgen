@@ -1,0 +1,45 @@
+#!/bin/bash
+echo "
+ #####  #     #   #####  ##### #   #                  
+#     # ##   ##   #      #     ##  #                  
+#       # # # #   #  ##  ###   # # #                  
+#     # #  #  #   #   ## #     #  ##                  
+ #####  #     #    ### # ##### #   #                  
+"
+if [ -z "$1" ]
+then
+  read -p "Project name: " projectName
+else
+  projectName=$1
+fi
+
+mkdir src
+mkdir lib
+mkdir includes
+touch src/main.cpp
+mkdir Build
+echo "CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+PROJECT(${projectName})
+
+SET(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++11")
+
+SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+SET(PROJECT_BINARY_DIR \${PROJECT_SOURCE_DIR}/Output)
+SET(LIBRARY_OUTPUT_PATH \${PROJECT_BINARY_DIR}lib)
+SET(EXECUTABLE_OUTPUT_PATH \${PROJECT_BINARY_DIR})
+
+INCLUDE_DIRECTORIES(\${PROJECT_SOURCE_DIR}/includes)
+
+LINK_DIRECTORIES(\${PROJECT_SOURCE_DIR}/lib)
+
+AUX_SOURCE_DIRECTORY(\${PROJECT_SOURCE_DIR}/src MainSrc)
+ADD_EXECUTABLE(\${PROJECT_NAME} \${MainSrc})
+TARGET_LINK_LIBRARIES(\${PROJECT_NAME})" > CMakeLists.txt
+
+cd Build 
+cmake ..
+cd ..
+ln Build/compile_commands.json 
+
+echo "[INFO] Generation Done!"

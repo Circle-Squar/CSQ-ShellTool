@@ -1,0 +1,342 @@
+#!/bin/bash
+function init {
+	videobinary=5500
+	videocoder='h264'
+	k=600
+	level=4.1
+	preset='slow'
+	VideoProfile='main'
+
+	audiobinary=320
+	audiocoder='aac'
+	AC=2
+	ar=44100
+
+	time=1
+	i='Null'
+}
+
+function executeffmpeg {
+for i in ./source/*
+do
+	ffmpeg -i "$i" -c:a $audiocoder -b:a "$audiobinary"k -ac $AC -ar $ar -c:v $videocoder -b:v "$videobinary"k -g $k -pix_fmt yuv420p -profile:v $VideoProfile -preset $preset -level $level -deinterlace ./finish/$time.flv
+	let time+=1
+done
+}
+
+
+
+
+
+
+function SetVideoProfile {
+	clear
+	echo -e "\t1.\tBaseLine"
+	echo -e "\t2.\tMain"
+	echo -e "\t3.\tHigh"
+	read -n 1 option
+	case $option in
+		1)
+			VideoProfile='baseline'
+			;;
+		2)
+			VideoProfile='main'
+			;;
+		3)
+			VideoProfile='high'
+			;;
+	esac
+}
+
+function SetVideoCoder {
+	clear
+	echo
+	echo -e "\t\t\tVideoCoderSelector"
+	echo -e "\t\t1.\t\tH.264"
+	echo -e "\t\t2.\t\tX.264"
+	echo -e "\t\t3.\t\tMpeg4"
+	echo -e "\t\tB.\t\tback"
+	read -n 1 VideoCoderSelect
+	case $VideoCoderSelect in
+	1)
+		videocoder='h264'
+		;;
+	2)
+		videocoder='libx264'
+		;;
+	3)
+		videocoder='mpeg4'
+		;;
+	esac
+}
+
+function SetVideoLevel {
+	clear
+	echo
+	echo -e "\t\t\tSetVideoLevel"
+	echo -e "\t1.\t\t4.1"
+	echo -e "\t2.\t\t5.1"
+	echo -e "\t\tB.\t\tback"
+
+	read -n 1 levelselect
+	case $levelselect in
+		1)
+			level='4.1'
+			;;
+		2)
+			level='5.1'
+			;;
+	esac
+}
+
+function SetVideoPreset {
+		clear
+		echo
+		echo -e "t\\t\tPreset"
+		echo
+		echo -e "\t\t\t0.ultrafast"
+		echo -e "\t\t\t1.superfast"
+		echo -e "\t\t\t2.veryfast"
+		echo -e "\t\t\t3.faster"
+		echo -e "\t\t\t4.fast"
+		echo -e "\t\t\t5.medium"
+		echo -e "\t\t\t6.slow"
+		echo -e "\t\t\t7.slower"
+		echo -e "\t\t\t8.veryslow"
+		echo -e "\t\t\t9.placebo"
+		read -n 1 -p "Your's options" presetopt
+		case $presetopt in
+			0)
+				preset='ultrafast'
+				;;
+			1)
+				preset='superfast'
+				;;
+			2)
+				preset='veryfast'
+				;;
+			3)
+				preset='faster'
+				;;
+			4)
+				preset='fast'
+				;;
+			5)
+				preset='medium'
+				;;
+			6)
+				preset='slow'
+				;;
+			7)
+				preset='slower'
+				;;
+			8)
+				preset='veryslow'
+				;;
+			9)
+				preset='placebo'
+				;;
+		esac
+}
+
+
+
+
+
+
+function SetAudioCoder {
+		clear
+		echo
+		echo -e "\t\t\tAudioCoderSelector"
+		echo -e "\t\t1.\t\tMpeg3"
+		echo -e "\t\t2.\t\tAAC"
+		echo -e "\t\t3.\t\tFlac"
+		echo -e "\t\tB.\t\tBack"
+		read -n 1 tAudioCoderSelect
+		case $tAudioCoderSelect in
+			1)
+				audiocoder='mp3'
+				;;
+			2)
+				audiocoder='aac'
+				;;
+			3)
+				audiocoder='flac'
+				;;
+		esac
+}
+
+function SetAudioRate {
+	clear
+	echo
+	echo -e "\t\t\tAudio Rate Selector"
+	echo -e "\t\t1.\t11025Hz"
+	echo -e "\t\t2.\t22050Hz"
+	echo -e "\t\t3.\t24000Hz"
+	echo -e "\t\t4.\t44100Hz"
+	echo -e "\t\t5.\t48000Hz"
+	echo
+	read -n 1 option
+	case $option in
+		1)
+			ar=11025
+			;;
+		2)
+			ar=22050
+			;;
+		3)
+			ar=24000
+			;;
+		4)
+			ar=44100
+			;;
+		5)
+			ar=48000
+			;;
+	esac
+}
+
+
+
+
+
+function menu {
+	option=-1
+	clear
+	echo
+	echo  -e "\t\t\tFFMpeg recoder"
+	echo  -e "\t\t1.\t\tVideo setting"
+	echo  -e "\t\t2.\t\tAudio setting"
+	echo  -e "\t\tE.\t\tExecute"
+	echo  -e "\t\tQ.\t\tQuit"
+	##Status
+	echo
+	echo
+	echo -e "			status"
+	echo -e "Video"
+	echo -e "Binary:"$videobinary"k\tcoder:"$videocoder"\tLevel:"$level"\tPreset:"$preset"\t K frames:"$k"\tProfile:"$VideoProfile
+	echo -e "Audio"
+	echo -e "Binary:"$audiobinary"k\tcoder:"$audiocoder"\tAC:"$AC"\tAr:"$ar
+	echo -e "\nExecute command:"
+	echo -e "ffmpeg -i "$i" -c:a $audiocoder -b:a "$audiobinary"k -ac $AC -ar $ar -c:v $videocoder -b:v "$videobinary"k -g $k -pix_fmt yuv420p -profile:v $VideoProfile -preset $preset -level $level -deinterlace ./finish/$time.flv"
+	read -n 1 option
+
+}
+function videomenu {
+while true
+do
+	option=-1
+	clear
+	echo
+	echo  -e "\t\t\tVideo Seting"
+	echo  -e "\t\t1.\t\tSet video binary"
+	echo  -e "\t\t2.\t\tSet video coder"
+	echo  -e "\t\t3.\t\tSet video level"
+	echo  -e "\t\t4.\t\tSet video preset"
+	echo  -e "\t\t5.\t\tSet K Frames"
+	echo  -e "\t\t6.\t\tSet Video Profile"
+	echo  -e "\t\tB.\t\tBack"
+	read -n 1 option
+	case $option in
+	#Video
+	1)
+		clear
+		read -p "Set Video Binary(k):" videobinary
+		;;
+	2)
+		clear
+		SetVideoCoder
+		;;
+	3)
+		clear
+		SetVideoLevel
+		;;
+	4)
+		clear
+		SetVideoPreset
+		;;
+	5)
+		read -p "How long was a K frames:" k
+		;;
+	6)
+		SetVideoProfile
+		;;
+	b)
+		break
+		;;
+	B)
+		break
+		;;
+	esac
+done
+}
+function audiomenu {
+while true
+do
+	option=-1
+	clear
+	echo
+	echo  -e "\t\t\tAudio Setting"
+	echo  -e "\t\t1.\t\tSet audio binary"
+	echo  -e "\t\t2.\t\tSet audio coder"
+	echo  -e "\t\t3.\t\tSet audio conter"
+	echo  -e "\t\t4.\t\tSet audio rate"
+	echo  -e "\t\tB.\t\tBack"
+	read -n 1 option
+	case $option in
+		1)
+			clear
+			read -p "Set Aduio Binary(k):" audiobinary
+			;;
+		2)
+			SetAudioCoder
+			;;
+		3)
+			clear
+			read -n 1 -p "Set AC:" AC
+			;;
+		4)
+			clear
+			SetAudioRate
+			;;
+		b)
+			break
+			;;
+		B)
+			break
+			;;
+	esac
+done
+}
+
+
+
+
+init
+while true
+do
+	menu
+	#Audio
+
+	case $option in
+	1)
+		videomenu
+		;;
+	2)
+		audiomenu
+		;;
+	e)
+		executeffmpeg
+		break
+		;;
+	q)
+		clear
+		break
+		;;
+	Q)
+		clear
+		break
+		;;
+	esac
+	clear
+done
