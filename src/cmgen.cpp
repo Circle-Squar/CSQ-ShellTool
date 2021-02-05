@@ -229,7 +229,7 @@ int main(int argc, char *argv[]) {
     MainFile << "#include<iostream>" << std::endl;
     MainFile << std::endl;
     MainFile << "int main(int argc, char* argv[]){" << std::endl;
-    MainFile << "\tstd::cout<<\"hello, world\"<<std::endl" << std::endl;
+    MainFile << "\tstd::cout<<\"hello, world\"<<std::endl;" << std::endl;
     MainFile << "\treturn 0;" << std::endl;
     MainFile << "}";
     MainFile.close();
