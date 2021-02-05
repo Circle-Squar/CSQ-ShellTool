@@ -1,4 +1,5 @@
 test.sh
+compile_commands.json
 .ccls-cache
 Build/*
 Output
