@@ -167,9 +167,9 @@ int main(int argc, char *argv[]) {
     cmakeFile << std::endl;
     cmakeFile << "SET(PROJECT_BINARY_DIR ${PROJECT_SOURCE_DIR}/output)"
               << std::endl;
-    cmakeFile << "SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}lib)"
+    cmakeFile << "SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)"
               << std::endl;
-    cmakeFile << "SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}bin)"
+    cmakeFile << "SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)"
               << std::endl;
     cmakeFile << std::endl;
     cmakeFile << "SET(LIBS )" << std::endl;
